@@ -106,7 +106,7 @@ registerUser = async (req, res) => {
         console.log("all fields provided");
         if (password.length < 8) {
             return res
-                .status(400)
+                .status(401)
                 .json({
                     errorMessage: "Please enter a password of at least 8 characters."
                 });
@@ -114,7 +114,7 @@ registerUser = async (req, res) => {
         console.log("password long enough");
         if (password !== passwordVerify) {
             return res
-                .status(400)
+                .status(402)
                 .json({
                     errorMessage: "Please enter the same password twice."
                 })
@@ -124,7 +124,7 @@ registerUser = async (req, res) => {
         console.log("existingUser: " + existingUser);
         if (existingUser) {
             return res
-                .status(400)
+                .status(403)
                 .json({
                     success: false,
                     errorMessage: "An account with this email address already exists."

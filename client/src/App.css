@@ -69,6 +69,16 @@ body {
   vertical-align: center;
 }
 
+#failedToLogin{
+  color: red;
+  visibility: hidden;
+}
+
+#failedToRegister{
+  color: red;
+  visibility: hidden;
+}
+
 #edit-toolbar {
   background-color: transparent;
   float: right;
