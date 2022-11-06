@@ -1,8 +1,6 @@
 import { useContext } from 'react';
 import AuthContext from '../auth'
-
 import Copyright from './Copyright'
-
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -15,6 +13,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { Modal } from '@mui/material';
+import Alert from '@mui/material/Alert';
+import { width } from '@mui/system';
 
 export default function LoginScreen() {
     const { auth } = useContext(AuthContext);
@@ -28,6 +29,17 @@ export default function LoginScreen() {
         );
 
     };
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        width: 500,
+        border: '1px solid #000',
+        p: 4,
+    }
+    const handleClose = () => {
+        auth.closeModal();
+    }
 
     return (
         <Grid container component="main" sx={{ height: '100vh' }}>
@@ -47,6 +59,36 @@ export default function LoginScreen() {
                 }}
             />
             <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                <div>
+                    <Modal
+                    aria-labelledby = "failedLogin-modal-title"
+                    aria-describedby = "failedLogin-modal-description"
+                    id = "failedLoginModal"
+                    open = {auth.loginErr}
+                    onClose = {handleClose}
+                    > 
+                    <Box sx = {style}>
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "flex-end",
+                            height: 6
+                        }}>
+                            <Button variant = "contained"
+                            style ={{
+                                bottom: 16,
+                                left: 8,
+                                backgroundColor: "#f0625f",
+                                padding: 9,
+                                minWidth: 16,
+                                borderRadius: 5,
+                            }}
+                            onClick = {handleClose}
+                            > X </Button>
+                        </div>
+                        <Alert severity = "error"> Incorrect email or password! </Alert>
+                    </Box>
+                    </Modal>
+                </div>
                 <Box
                     sx={{
                         my: 8,
@@ -102,7 +144,7 @@ export default function LoginScreen() {
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link href="/register/" variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>

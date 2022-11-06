@@ -12,7 +12,7 @@ export const AuthActionType = {
     LOGOUT_USER: "LOGOUT_USER",
     REGISTER_USER: "REGISTER_USER",
     LOGIN_ERR : "LOGIN_ERR",
-    REGISTER_ERR: "REGISTER_ERR"
+    REGISTER_ERR: "REGISTER_ERR",
 }
 
 function AuthContextProvider(props) {
@@ -79,6 +79,14 @@ function AuthContextProvider(props) {
                     registerErr: true,
                 })
             }
+            case AuthActionType.CLOSE_MODAL: {
+                return setAuth({
+                    user: auth.user,
+                    loggedIn: auth.loggedIn,
+                    loginErr: false,
+                    registerErr: false,
+                })
+            }
             
             default:
                 return auth;
@@ -113,25 +121,26 @@ function AuthContextProvider(props) {
         }
         } catch(error){
             let err = document.getElementById("failedToRegister");
-            err.classList.add("is-visible");
             authReducer({
                 type: AuthActionType.REGISTER_ERR,
                 payload: {
                 }
             })
-            // password error handling
-            if(error.response.status == 400){
+            /*
+            password error handling
+            if(error.response.status === 400){
                 err.innerHTML = "Please enter all required fields."
             }
-            else if(error.response.status == 401){
+            else if(error.response.status === 401){
                 err.innerHTML = "Please enter a password of at least 8 characters."
             }
-            else if(err.response.status == 402){
+            else if(err.response.status === 402){
                 err.innerHTML= "Please enter the same password twice."
             }
-            else if(err.response.status == 403){
+            else if(err.response.status === 403){
                 err.innerHTML = "An account with this email address already exists."
             }
+            */
         }
         
     }
@@ -150,8 +159,6 @@ function AuthContextProvider(props) {
             history.push("/");
         }
         } catch(error){
-            let err = document.getElementById("failedToLogin");
-            err.classList.add("is-visible")
             authReducer({
                 type: AuthActionType.LOGIN_ERR,
                 payload: {
@@ -159,6 +166,14 @@ function AuthContextProvider(props) {
             })
         }
    
+    }
+
+    auth.closeModal = function () {
+        console.log("CLOSE MODAL FUNCTION REACHED");
+        authReducer({
+            type: AuthActionType.CLOSE_MODAL,
+            payload: {}
+        })
     }
 
     auth.logoutUser = async function() {

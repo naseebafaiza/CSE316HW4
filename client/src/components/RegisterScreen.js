@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import AuthContext from '../auth'
 import Copyright from './Copyright'
-
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -12,9 +11,24 @@ import Link from '@mui/material/Link';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { Modal } from '@mui/material';
+import Alert from '@mui/material/Alert';
 
 export default function RegisterScreen() {
     const { auth } = useContext(AuthContext);
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        width: 400,
+        border: '1px solid #000',
+        boxShadow: 24,
+        p: 4,
+    }
+
+    const handleClose = () => {
+        auth.closeModal();
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -31,6 +45,41 @@ export default function RegisterScreen() {
     return (
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
+                <div>
+                <Modal
+                        aria-labelledby="failedLogin-modal-title"
+                        aria-describedby="failedLogin-modal-description"
+                        id = "failedLoginModal"
+                        open = {auth.registerErr}
+                        onClose = {handleClose}
+                    >
+                        <Box sx={style}>
+                            <div style={{
+                                display:"flex",
+                                justifyContent: 'flex-end',
+                                height: 6
+                            }}>
+                            <Button variant="contained"
+                                style={{
+                                    bottom: 16,
+                                    left: 8,
+                                    backgroundColor:"#f0625f",
+                                    padding: 9,
+                                    minWidth: 16,
+                                    borderRadius: 5,
+                                }}
+                                onClick={handleClose}
+                            >
+                            X</Button></div>
+                            <Alert severity="error">
+                                <div
+                                id = 'registerErrorMessage'>
+                                    Failed to register. Password must be of 8 characters and must match.
+                                </div>
+                            </Alert>
+                        </Box>
+                    </Modal>
+                </div>
                 <Box
                     sx={{
                         marginTop: 8,
