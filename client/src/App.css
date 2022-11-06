@@ -38,7 +38,7 @@ body {
   left: 0%;
 }
 
-#top5-banner {
+#playlister-banner {
   position: absolute;
   left: 0%;
   top: 0%;
@@ -84,8 +84,8 @@ body {
   float: right;
 }
 
-.top5-button,
-.top5-button-disabled {
+.playlister-button,
+.playlister-button-disabled {
   font-size: 36pt;
   border-width: 0px;
   float: left;
@@ -94,17 +94,17 @@ body {
   opacity: 100%;
 }
 
-.top5-button:hover {
+.playlister-button:hover {
   cursor: pointer;
   color: black;
 }
 
-.top5-button-disabled {
+.playlister-button-disabled {
   opacity: 0.25;
   cursor: not-allowed;
 }
 
-#top5-list-selector {
+#playlister-list-selector {
   position: absolute;
   left: 0%;
   top: 10%;
@@ -113,7 +113,7 @@ body {
   background-color: var(--swatch-primary);
 }
 
-#top5-workspace {
+#playlister-workspace {
   position: absolute;
   left: 0%;
   top: 10%;
@@ -122,7 +122,7 @@ body {
   background-color: var(--swatch-accent);
 }
 
-#top5-statusbar {
+#playlister-statusbar {
   position: absolute;
   left: 0%;
   top: 90%;
@@ -229,8 +229,8 @@ body {
 }
 
 .item-number,
-.top5-item,
-.top5-item-dragged-to {
+.playlister-item,
+.playlister-item-dragged-to {
   display: flex;
   align-items: center;
   font-size: 48pt;
@@ -250,16 +250,16 @@ input {
   font-size: 20pt;
 }
 
-.top5-item,
-.top5-item-dragged-to {
+.playlister-item,
+.playlister-item-dragged-to {
   text-align: left;
   width: 95%;
   padding-left: 5%;
 }
-.top5-item {
+.playlister-item {
   background-color: var(--swatch-complement);
 }
-.top5-item-dragged-to {
+.playlister-item-dragged-to {
   background-color: var(--swatch-accent);
 }
 
