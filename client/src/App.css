@@ -320,6 +320,12 @@ input {
   transition: all 0.35s ease-in;
   font-family: var(--font-primary);
 }
+#home, #loggedIn{
+  z-index: 2;
+}
+#account{
+  z-index:1;
+}
 
 .modal.is-visible {
   visibility: visible;

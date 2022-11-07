@@ -30,6 +30,7 @@ export default function AppBanner() {
 
     const handleLogout = () => {
         handleMenuClose();
+        store.closeCurrentList();
         auth.logoutUser();
     }
 
@@ -86,7 +87,7 @@ export default function AppBanner() {
         let userInitials = auth.getUserInitials();
         console.log("userInitials: " + userInitials);
         if (loggedIn) 
-            return <div>{userInitials}</div>;
+            return <div id= "loggedIn"> = {userInitials}</div>;
         else
             return <AccountCircle />;
     }
@@ -97,15 +98,17 @@ export default function AppBanner() {
                 <Toolbar>
                     <Typography                        
                         variant="h4"
+                        id="home"
                         noWrap
                         component="div"
                         sx={{ display: { xs: 'none', sm: 'block' } }}                        
                     >
-                        <Link style={{ textDecoration: 'none', color: 'white' }} to='/'>⌂</Link>
+                        <Link style={{ textDecoration: 'none', color: 'white' }} to='/' onClick={store.closeCurrentList}>⌂</Link>
                     </Typography>
                     <Box sx={{ flexGrow: 1 }}>{editToolbar}</Box>
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                         <IconButton
+                        id = "account"
                             size="large"
                             edge="end"
                             aria-label="account of current user"

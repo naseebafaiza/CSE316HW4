@@ -74,7 +74,7 @@ export default function RegisterScreen() {
                             <Alert severity="error">
                                 <div
                                 id = 'registerErrorMessage'>
-                                    Failed to register. Password must be of 8 characters and must match.
+                                    Failed to register
                                 </div>
                             </Alert>
                         </Box>
