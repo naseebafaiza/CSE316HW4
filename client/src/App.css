@@ -53,6 +53,35 @@ body {
   border-style: solid;
   border-radius: 10px;
 }
+
+#playlist-selector, #playlist-cards{
+  width: 100%;
+  height: 80%;
+  overflow: scroll;
+  grid-column: 1/3;
+  grid-row: 2/3;
+  display: grid;
+  background-color: var(--swatch-neutral);
+}
+#playlist-cards{
+  height: 544px;
+  grid-column: 2/3;
+  grid-row: 3/4;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+#list-selector-list{
+  position: absolute;
+  top: 10%;
+  width: 100%;
+  height: 550px;
+  background-color: var(--swatch-neutral);
+  overflow:scroll;
+  left: 0%;
+}
+
 #splash-screen {
   background-image: linear-gradient(to bottom, #b8b808, #636723);
   color: white;
@@ -351,6 +380,45 @@ input {
   text-align: center;
 }
 
+.modal-root > * {
+  width: 500px;
+  background-color: white;
+  border: grey;
+}
+.modal-north{
+  background-color: blue;
+  color: white;
+  font-size: 25pt;
+}
+.modal-center{
+  display: grid;
+  background-color: grey;
+  color: white;
+  font-size: 20pt;
+}
+.modal-south{
+  display: flex;
+  background-color: grey;
+  align-items: center;
+}
+.modal-center-content{
+  grid-column: 1/3;
+  grid-row: 1/4;
+}
+.modal-prompt{
+  font-size: 22pt;
+}
+.modal-textfield{
+  font-size: 20pt;
+  margin-bottom: 1.8rem;
+}
+.modal-button{
+  font-size: 19pt;
+}
+.modal-control{
+  cursor: pointer;
+  width: 25%;
+}
 /* ANIMATIONS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 [data-animation] .modal-dialog {
