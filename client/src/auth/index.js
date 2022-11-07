@@ -21,6 +21,7 @@ function AuthContextProvider(props) {
         loggedIn: false,
         loginErr: false,
         registerErr: false,
+        errorMessage: null,
     });
     const history = useHistory();
 
@@ -37,6 +38,7 @@ function AuthContextProvider(props) {
                     loggedIn: payload.loggedIn,
                     loginErr: false,
                     registerErr: false,
+                    errorMessage: null,
                 });
             }
             case AuthActionType.LOGIN_USER: {
@@ -45,6 +47,7 @@ function AuthContextProvider(props) {
                     loggedIn: true,
                     loginErr: false,
                     registerErr: false,
+                    errorMessage: null,
                 })
             }
             case AuthActionType.LOGOUT_USER: {
@@ -53,6 +56,7 @@ function AuthContextProvider(props) {
                     loggedIn: false,
                     loginErr: false,
                     registerErr: false,
+                    errorMessage: null,
                 })
             }
             case AuthActionType.REGISTER_USER: {
@@ -61,6 +65,7 @@ function AuthContextProvider(props) {
                     loggedIn: true,
                     loginErr: false,
                     registerErr: false,
+                    errorMessage: null,
                 })
             }
             case AuthActionType.LOGIN_ERR: {
@@ -69,6 +74,7 @@ function AuthContextProvider(props) {
                     loggedIn: auth.loggedIn,
                     loginErr: true,
                     registerErr: false,
+                    errorMessage: payload,
                 })
             }
             case AuthActionType.REGISTER_ERR: {
@@ -77,6 +83,7 @@ function AuthContextProvider(props) {
                     loggedIn: auth.loggedIn,
                     loginErr: false,
                     registerErr: true,
+                    errorMessage: payload,
                 })
             }
             case AuthActionType.CLOSE_MODAL: {
@@ -85,6 +92,7 @@ function AuthContextProvider(props) {
                     loggedIn: auth.loggedIn,
                     loginErr: false,
                     registerErr: false,
+                    errorMessage: null,
                 })
             }
             
@@ -120,27 +128,14 @@ function AuthContextProvider(props) {
             history.push("/");
         }
         } catch(error){
-            let err = document.getElementById("failedToRegister");
+            console.log("ERROR IN AUTH INDEX: " + error);
+            let err = error.response.data.errorMessage;
+            console.log(err);
             authReducer({
                 type: AuthActionType.REGISTER_ERR,
-                payload: {
-                }
+                payload: err
             })
-            /*
-            password error handling
-            if(error.response.status === 400){
-                err.innerHTML = "Please enter all required fields."
-            }
-            else if(error.response.status === 401){
-                err.innerHTML = "Please enter a password of at least 8 characters."
-            }
-            else if(err.response.status === 402){
-                err.innerHTML= "Please enter the same password twice."
-            }
-            else if(err.response.status === 403){
-                err.innerHTML = "An account with this email address already exists."
-            }
-            */
+            
         }
         
     }

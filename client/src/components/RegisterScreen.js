@@ -41,6 +41,11 @@ export default function RegisterScreen() {
             formData.get('passwordVerify')
         );
     };
+    let errMsg = "";
+    if(auth.errorMessage){
+        errMsg = auth.errorMessage;
+        console.log("ERROR MESSAGE IN MODAL: " + errMsg);
+    }
 
     return (
             <Container component="main" maxWidth="xs">
@@ -74,7 +79,7 @@ export default function RegisterScreen() {
                             <Alert severity="error">
                                 <div
                                 id = 'registerErrorMessage'>
-                                    Failed to register
+                                    {errMsg}
                                 </div>
                             </Alert>
                         </Box>
