@@ -1,5 +1,6 @@
 const Playlist = require('../models/playlist-model')
 const User = require('../models/user-model');
+const auth = require('../auth');
 /*
     This is our back-end API. It provides all the data services
     our database needs. Note that this file contains the controller
@@ -26,6 +27,12 @@ createPlaylist = (req, res) => {
 
     User.findOne({ _id: req.userId }, (err, user) => {
         console.log("user found: " + JSON.stringify(user));
+        if (user.email != body.ownerEmail) {
+            return res.status(400).json({
+                success: false,
+                errorMessage: "UNAUTHORIZED"
+            })
+        }
         user.playlists.push(playlist._id);
         user
             .save()
@@ -48,6 +55,12 @@ createPlaylist = (req, res) => {
 deletePlaylist = async (req, res) => {
     console.log("delete Playlist with id: " + JSON.stringify(req.params.id));
     console.log("delete " + req.params.id);
+    if(auth.verifyUser(req) === null){
+        return res.status(400).json({
+            errorMessage: 'UNAUTHORIZED'
+        })
+    }
+
     Playlist.findById({ _id: req.params.id }, (err, playlist) => {
         console.log("playlist found: " + JSON.stringify(playlist));
         if (err) {
@@ -158,6 +171,12 @@ updatePlaylist = async (req, res) => {
     const body = req.body
     console.log("updatePlaylist: " + JSON.stringify(body));
     console.log("req.body.name: " + req.body.name);
+    
+    if(auth.verifyUser(req) === null){
+        return res.status(400).json({
+            errorMessage: 'UNAUTHORIZED'
+        })
+    }
 
     if (!body) {
         return res.status(400).json({
